@@ -1,8 +1,15 @@
 { pkgs ? import <nixpkgs> {} }:
 
+
+
 pkgs
 .mkShell {
   
+#packages = with pkgs; [
+#        libguestfs 
+#        libguestfs-with-appliance
+#];
+
 nativeBuildInputs =
     
 with pkgs; [
