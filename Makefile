@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/03/20 15:15:15 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/03/20 15:20:49 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,7 @@ start:
 
 compile:	
 		cd CompiledFiles && ${CC} ${DEFAULT_FLAGS} -std=gnu99 -ffreestanding -g -c ${SRCS} && \
-		${CC} ${DEFAULT_FLAGS}  -ffreestanding -g \
-		 -T ${LINKER} ${SRCS.O} -o $(KERNEL).elf -lgcc 
+		${CC} -T ${LINKER} -o $(KERNEL).elf ${DEFAULT_FLAGS} -ffreestanding -g ${SRCS.O} -lgcc 
 	 
 test:
 	qemu-system-i386 -kernel ${OUTPUT_DIR}/$(KERNEL).elf
@@ -45,7 +44,7 @@ grub-update:
 	cp ./${OUTPUT_DIR}/DuckyKernel.elf ./IsoDir/boot
 
 grub-setup: grub-update
-	grub-mkrescue ./IsoDir -o $(OS).iso
+	grub-mkrescue ./IsoDir -o ${OUTPUT_DIR}/$(OS).iso
 
 clean: 
 	rm -rf ./${OUTPUT_DIR}/*.o
