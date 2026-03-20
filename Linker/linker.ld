@@ -12,14 +12,11 @@ SECTIONS
 
 	/* First put the multiboot header, as it's required to be near the start of the executable otherwise the bootloader won't find it */
 	/* The Multiboot header is Read-Only data, so we can put it in a '.rodata' section. */
-	.rodata BLOCK(4K) : ALIGN(4K)
-	{
-		*(.multiboot)
-	}
 
 	/* Executable code */
 	.text BLOCK(4K) : ALIGN(4K)
 	{
+		*(.multiboot)
 		*(.text)
 	}
 

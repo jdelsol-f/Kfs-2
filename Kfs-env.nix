@@ -15,6 +15,7 @@ nativeBuildInputs =
 with pkgs; [
         pkgsCross
 .i686-embedded.buildPackages.gcc
+        pkgs.mtools
     
 ];
 }
