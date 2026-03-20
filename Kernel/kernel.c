@@ -96,6 +96,6 @@ void kernel_main()
 	term_init();
 
 	// Display some messages
-	term_print("Hello, World!\n");
-	term_print("Welcome to the kernel.\n");
+	term_print("42");
+	//term_print("Welcome to the kernel.\n");
 }

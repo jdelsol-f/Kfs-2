@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/03/20 15:20:49 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/03/20 17:16:03 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,9 @@ clean:
 fclean: clean
 	rm -rf ./${OUTPUT_DIR}/*.elf
 	rm -rf ./${OUTPUT_DIR}/*.iso
+	rm -rf ./IsoDir/boot/*.elf
 	
 re: fclean all
 
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re start grub-setup test grub-update compile
