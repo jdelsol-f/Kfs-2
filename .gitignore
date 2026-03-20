@@ -1,6 +1,6 @@
-**.o
-**.elf
+**/*.o
+**/*.elf
 result
-**.iso
+**/*.iso
 .img
 .Makefile.swp
