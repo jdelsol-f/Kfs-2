@@ -40,14 +40,6 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 	return (uint16_t) uc | (uint16_t) color << 8;
 }
 
-size_t strlen(const char* str) 
-{
-	size_t len = 0;
-	while (str[len])
-		len++;
-	return len;
-}
-
 #define VGA_WIDTH   80
 #define VGA_HEIGHT  25
 #define VGA_MEMORY  0xB8000
@@ -81,30 +73,52 @@ void term_setcolor(uint8_t color)
 
 void term_scrolling()
 {
-	
+	term_color = vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK);
+	for (int col = 0; col < VGA_COLS; col ++)
+	{
+		for (int row = 1; row < VGA_ROWS; row ++)
+		{
+			const size_t index1 = (VGA_COLS * row) + col;
+			const size_t index2 = (VGA_COLS * (row - 1)) + col;
+			term_buffer[index2] = term_buffer[index1];
+		} 
+	}
+	for (int col = 0; col < VGA_COLS; col ++)
+	{
+			const size_t index = (VGA_COLS * (VGA_ROWS - 1)) + col;
+			term_buffer[index] = vga_entry(' ', term_color);
+	}
 }
 
-void term_putentryat(char c, uint8_t color, size_t x, size_t y) 
+void term_putentryat(char c, uint8_t color, size_t col, size_t row) 
 {
-	const size_t index = y * VGA_WIDTH + x;
+	const size_t index = row * VGA_WIDTH + col;
 	term_buffer[index] = vga_entry(c, color);
 }
 
 void term_putchar(char c) 
 {
 	term_putentryat(c, term_color, term_col, term_row);
-	term_col++:
+	term_col++;
 	if (term_col >= VGA_WIDTH || c == '\n') {
 		term_col = 0;
 		term_row++;
 
 		if (term_row == VGA_HEIGHT)
 		{
-			term_row = 0;
+			// term_row = 0;
 			term_scrolling();
 			//note to add, for the multi-screen, multi-buffer for each screen that works as extention of the last one
 		}
 	}
+}
+
+size_t strlen(const char* str) 
+{
+	size_t len = 0;
+	while (str[len])
+		len++;
+	return len;
 }
 
 void term_write(const char* data, size_t size) 
@@ -118,12 +132,10 @@ void term_writestring(const char* data)
 	term_write(data, strlen(data));
 }
 
-
-
 void kernel_main()
 {
 
 	term_init();
 
-	term_writestring("420000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+	term_writestring("");
 }
