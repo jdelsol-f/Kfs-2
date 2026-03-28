@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Colors.c                                           :+:      :+:    :+:   */
+/*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/27 15:57:43 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/27 16:02:23 by jdelsol-         ###   ########.fr       */
+/*   Created: 2026/03/28 17:57:47 by jdelsol-          #+#    #+#             */
+/*   Updated: 2026/03/28 18:01:02 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "define.h"
+#include "inputs.h"
 
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) 
+uint8_t inb(uint16_t port)
 {
-	return fg | bg << 4;
-}
+    uint8_t ret;
+    asm volatile("inb %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+};
 
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color) 
+void outb(uint16_t port, uint8_t value)
 {
-	return (uint16_t) uc | (uint16_t) color << 8;
-}
+    asm volatile("outb %0, %1" : : "a"(value), "d"(port) : "memory");
+};
 
-uint8_t term_setcolor(uint8_t color) 
+uint8_t keyboard_read_input()
 {
-	uint8_t term_color = color;
-
-    return (term_color);
-}
+    //if something is on port 0x60
+    while(!(inb(0x64) & 1));
+    return inb(0x60);
+};
