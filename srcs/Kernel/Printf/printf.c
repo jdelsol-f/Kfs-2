@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:33:16 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 17:33:17 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:10:36 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,6 @@ int	ft_printf(const char *str, ...)
 	va_start(parameter, str);
 	count = ft_printfbis(str, i, count, &parameter);
 	va_end(parameter);
-    update_cursor(term_col, term_row);
+    update_cursor(NULL);
 	return (count);
 }

@@ -6,40 +6,40 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:29:18 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 18:04:52 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:44:05 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "terminal.h"
+#include "term.h"
 
+t_general_struct* get_data(t_general_struct *data)
+{
+    static t_general_struct* our_data = NULL;
+	if (data)
+		our_data = data;
+    return our_data;
+}
 
-volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
-
-int term_col = 0;
-int term_row = 0;
-uint8_t term_color;
-uint16_t* term_buffer = (uint16_t*)VGA_MEMORY;
-
-void term_init()
+void term_init(t_general_struct *data)
 {
 	enable_cursor(0, VGA_ROWS);
     
-	term_color = vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK);
+	data->term_color = vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK);
 
     //multi screens support
-	ft_chrset(term_one.buffer, vga_entry(' ', term_color), VGA_COLS * VGA_ROWS);
-	ft_chrset(term_two.buffer, vga_entry(' ', term_color), VGA_COLS * VGA_ROWS);
-	term_one.col = 0;
-	term_one.row = 0;
-	term_two.col = 0;
-	term_two.row = 0;
+	ft_chrset(data->term_one.buffer, vga_entry(' ', data->term_color), VGA_COLS * VGA_ROWS);
+	ft_chrset(data->term_two.buffer, vga_entry(' ', data->term_color), VGA_COLS * VGA_ROWS);
+	data->term_one.col = 0;
+	data->term_one.row = 0;
+	data->term_two.col = 0;
+	data->term_two.row = 0;
 
 	for (int col = 0; col < VGA_COLS; col ++)
 	{
 		for (int row = 0; row < VGA_ROWS; row ++)
 		{
 			const size_t index = (VGA_COLS * row) + col;
-			term_buffer[index] = vga_entry(' ', term_color);
+			(TERM_BUFFER)[index] = vga_entry(' ', data->term_color);
 		} 
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:57:47 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 18:01:02 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 18:48:17 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inputs.h"
+#include "io.h"
 
 uint8_t inb(uint16_t port)
 {

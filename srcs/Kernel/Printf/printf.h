@@ -6,14 +6,16 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:33:22 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 17:33:23 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 20:02:24 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 
-#include "../kernel.c"
+#include "../type.h"
+#include "../Write_functions/write_functions.h"
+#include "../IO/io.h"
 
 int        ft_printf(const char *str, ...);
 

@@ -6,14 +6,16 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:50:43 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 18:06:46 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:52:53 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRITE_FUNCTIONS_H
 # define WRITE_FUNCTIONS_H
 
-#include "../kernel.h"
+# include "../terminal-management/term.h"
+
+
 
 enum write_switch
 {
@@ -21,6 +23,10 @@ enum write_switch
 	INTEGER = 43,
 	HEXADECIMAL = 44
 };
+
+# ifndef TERM_BUFFER
+#  define TERM_BUFFER (uint16_t*)VGA_MEMORY
+# endif
 
 /* FUNCS */
 void term_write_all(int type, void* things);

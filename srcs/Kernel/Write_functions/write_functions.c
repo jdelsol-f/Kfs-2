@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write-functions.c                                  :+:      :+:    :+:   */
+/*   write_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 15:57:48 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 17:52:47 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:47:56 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,23 @@
 void term_putentryat(char c, uint8_t color, size_t col, size_t row) 
 {
 	const size_t index = row * VGA_WIDTH + col;
-	term_buffer[index] = vga_entry(c, color);
+	(TERM_BUFFER)[index] = vga_entry(c, color);
 }
 
 void term_putchar(char c) 
 {
-	term_putentryat(c, term_color, term_col, term_row);
-	term_col++;
-	if (term_col >= VGA_WIDTH || c == '\n') {
-		term_col = 0;
-		term_row++;
+	t_general_struct *data = get_data(NULL);
+	term_putentryat(c, data->term_color, data->col, data->row);
+	data->col++;
+	if (data->col >= VGA_WIDTH || c == '\n') {
+		data->col = 0;
+		data->row++;
 
-		if (term_row == VGA_HEIGHT)
+		if (data->row == VGA_HEIGHT)
 		{
 			// term_row = 0;
-			term_scrolling();
-			term_row--;
+			term_scrolling(data->term_color);
+			data->row--;
 			//note to add, for the multi-screen, multi-buffer for each screen that works as extention of the last one
 		}
 	}
@@ -111,5 +112,5 @@ void term_write_all(int type, void* things)
 	default:
 		break;
 	}
-	update_cursor(term_col, term_row);
+	update_cursor();
 }

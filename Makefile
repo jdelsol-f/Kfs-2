@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/03/28 18:18:24 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/03/28 19:49:00 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,22 +24,22 @@ SRCS =	../srcs/BootLoader/start.s \
 		 ../srcs/Kernel/Printf/printf.c \
 		 ../srcs/Kernel/terminal-management/term_init.c \
 		 ../srcs/Kernel/terminal-management/term_scrolling.c \
-		 ../srcs/Kernel/Write_functions/Write_functions.c 
+		 ../srcs/Kernel/Write_functions/write_functions.c 
 
 
 		 
 
 SRCS.O = ../${OUTPUT_DIR}/start.o \
 		 ../${OUTPUT_DIR}/kernel.o \
-		 ../${OUTPUT_DIR}/Colors/colors.o \
-		 ../${OUTPUT_DIR}/IO/cursor.o \
-		 ../${OUTPUT_DIR}/IO/io.o \
-		 ../${OUTPUT_DIR}/Printf/printf.o \
-		 ../${OUTPUT_DIR}/terminal-management/term_init.o \
-		 ../${OUTPUT_DIR}/terminal-management/term_scrolling.o \
-		 ../${OUTPUT_DIR}/Write_functions/Write_functions.o 
+		 ../${OUTPUT_DIR}/colors.o \
+		 ../${OUTPUT_DIR}/cursor.o \
+		 ../${OUTPUT_DIR}/io.o \
+		 ../${OUTPUT_DIR}/printf.o \
+		 ../${OUTPUT_DIR}/term_init.o \
+		 ../${OUTPUT_DIR}/term_scrolling.o \
+		 ../${OUTPUT_DIR}/write_functions.o 
 
-LINKER = ../Linker/linker.ld
+LINKER = ../srcs/Linker/linker.ld
 
 CC = i686-elf-gcc
 

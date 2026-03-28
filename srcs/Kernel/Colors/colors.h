@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Colors.h                                           :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:09:24 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 17:24:17 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 20:00:52 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
 
-#include "../kernel.h"
+#include "../type.h"
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
@@ -36,9 +36,9 @@ enum vga_color {
 
 // colors functions
 
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color);
-uint8_t term_setcolor(uint8_t color);
+uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
+uint16_t vga_entry(unsigned char uc, uint8_t color);
+// uint8_t term_setcolor(uint8_t color);
 
 
 #endif

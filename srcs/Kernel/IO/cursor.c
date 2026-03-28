@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:39:25 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 18:01:19 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:42:31 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void disable_cursor()
 	outb(0x3D5, 0x20);
 }
 
-void update_cursor(int x, int y)
+void    update_cursor()
 {
-	uint16_t pos = y * VGA_WIDTH + x;
+	t_general_struct* data = get_data(NULL);
+	uint16_t pos = data->row * VGA_WIDTH + data->col;
 
 	outb(0x3D4, 0x0F);
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
