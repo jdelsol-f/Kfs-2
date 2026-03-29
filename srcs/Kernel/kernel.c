@@ -2,10 +2,11 @@
 // They give us access to useful things like fixed-width types
 #include "kernel.h"
 
+
 char keymap[] = 
 {
     [0x00] = '\0',
-    [0x01] = '~',
+    [0x01] = ' ' /* ESCAPE */,
     [0x02] = '1',
 	[0x03] = '2',
 	[0x04] = '3',
@@ -32,8 +33,8 @@ char keymap[] =
     [0x19] = 'p',
     [0x1A] = '[',
     [0x1B] = ']',
-    [0x1C] = '\\',
-    [0x1D] = ' ', //ctrl
+    [0x1C] = '\n',
+    [0x1D] = ' ', // left ctrl
     [0x1E] = 'a',
     [0x1F] = 's',
     [0x20] = 'd',
@@ -45,7 +46,7 @@ char keymap[] =
 	[0x26] = 'l',
 	[0x27] = ';',
 	[0x28] = '\'',
-	[0x29] = '\n',
+	[0x29] = '`',
 	[0x2A] = ' ', //shift in
 	[0x2B] = '\\',
 	[0x2C] = 'z',
@@ -58,11 +59,41 @@ char keymap[] =
 	[0x33] = ',',
 	[0x34] = '.',
 	[0x35] = '/',
-	[0x36] = ' ',
-	[0x37] = ' ',
-	[0x38] = ' ', //alt
-	[0x39] = ' ',
-	[0x3A] = ' ', //capslocks in
+	[0x36] = ' ',// right shift
+	[0x37] = '*',
+	[0x38] = ' ',// left alt
+	[0x39] = ' ',// space
+	[0x3A] = ' ',// capslocks in
+	[0x3B] = ' ',// F1
+	[0x3C] = ' ',// F2
+	[0x3D] = ' ',// F3
+	[0x3E] = ' ',// F4
+	[0x3F] = ' ',// F5
+	[0x40] = ' ',// F6
+	[0x41] = ' ',// F7
+	[0x42] = ' ',// F8
+	[0x43] = ' ',// F9
+	[0x44] = ' ',// F10
+	[0x45] = ' ',// number lock
+	[0x46] = ' ',//  scroll lock
+	[0x47] = '7',
+	[0x48] = '8',
+	[0x49] = '9', 
+	[0x4A] = '-',
+	[0x4B] = '4',
+	[0x4C] = '5',
+	[0x4D] = '6',
+	[0x4E] = '+',
+	[0x4F] = '1',
+	[0x50] = '2',
+	[0x51] = '3',
+	[0x52] = '0',
+	[0x53] = '.',
+	[0x54] = ' ',// None
+	[0x55] = ' ',// None
+	[0x56] = '.',// None
+	[0x57] = ' ',// F11
+	[0x58] = ' ',// F12
 };
 
 void kernel_main()
@@ -76,7 +107,7 @@ void kernel_main()
 	term_write_all(STRING, "42");
 	term_write_all(STRING, (void *)"lol");
 	term_write_all(INTEGER, (void *)42);
-	term_write_all(HEXADECIMAL, (void *)(TERM_BUFFER));
+	term_write_all(HEXADECIMAL, 0x00);
 	term_write_all(STRING, "\n");
 	ft_printf("test str : %s", "lol");
 	ft_printf("test int : %i", 42);
@@ -112,6 +143,7 @@ void kernel_main()
 		}
 		else
 		{
+			0x1 == 0x01;
 			ft_printf("%p", scancode);
 			ft_printf("char : %i", keymap[scancode]);
 			term_putchar( keymap[scancode]);
