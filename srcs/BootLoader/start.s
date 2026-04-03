@@ -25,7 +25,7 @@
 	start:
 		mov $stack_top, %esp
  
-		call kernel_main
+		call main
  
 		hang:
 			cli

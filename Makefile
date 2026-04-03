@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/04/03 16:01:40 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/04/03 19:55:59 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,21 +21,19 @@ SRCS =	../srcs/BootLoader/start.s \
 		 ../srcs/Kernel/Colors/colors.c \
 		 ../srcs/Kernel/IO/cursor.c \
 		 ../srcs/Kernel/IO/io.c \
-		 ../srcs/Kernel/IO/keytab.c \
+		 ../srcs/Kernel/IO/numpad_SCK.c \
 		 ../srcs/Kernel/Printf/printf.c \
 		 ../srcs/Kernel/terminal-management/term_init.c \
 		 ../srcs/Kernel/terminal-management/term_scrolling.c \
 		 ../srcs/Kernel/Write_functions/write_functions.c 
 
 
-		 
-
 SRCS.O = ../${OUTPUT_DIR}/start.o \
 		 ../${OUTPUT_DIR}/kernel.o \
 		 ../${OUTPUT_DIR}/colors.o \
 		 ../${OUTPUT_DIR}/cursor.o \
 		 ../${OUTPUT_DIR}/io.o \
-		 ../${OUTPUT_DIR}/keytab.o \
+		 ../${OUTPUT_DIR}/numpad_SCK.o \
 		 ../${OUTPUT_DIR}/printf.o \
 		 ../${OUTPUT_DIR}/term_init.o \
 		 ../${OUTPUT_DIR}/term_scrolling.o \

@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:57:13 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 18:51:39 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:35:54 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "../terminal-management/term.h"
 
 /*keyboard keys*/
-extern const char lower_base_keymap[89];
-extern const char upper_base_keymap[89];
+// extern const char lower_base_keymap[89];
+// extern const char upper_base_keymap[89];
 
 /* INPUTS & OUTPUTS */
 uint8_t inb(uint16_t port);
@@ -30,7 +30,29 @@ void    disable_cursor();
 void    update_cursor();
 uint16_t get_cursor_position(void);
 
-enum keys_values{
+/* KEYBOARD */
+void ft_arrows(int *col,  int *row, int direction);
+void ft_page_cursor(int *col,  int *row, int direction);
+bool ft_Numlock(bool shift, bool numlock, uint8_t scancode, t_general_struct *data);
+void ft_E0_KEY(uint8_t scancode, t_general_struct *data);
+
+enum e_arrow_direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT	
+};
+
+enum e_page_cursor
+{
+	PG_UP,
+	PG_DOWN,
+	HOME,
+	END	
+};
+
+enum sp_keys_values{
     CTRL = 0x1D,
     LEFT_SHIFT = 0x2A,
     RIGHT_SHIFT = 0x36,
@@ -58,6 +80,87 @@ enum keys_values{
     
 };
 
+enum E0_keys_values{
+
+    K_PAD_SLASH = 0x35,
+    K_PAD_PAD_ENTER = 0x1C,
+    K_HOME  = 0x47,
+    K_ARROW_UP  = 0x48,
+    K_PG_UP  = 0x49,
+
+    K_ARROW_LEFT  = 0x4B,
+    K_NONE  = 0x4C,
+    K_ARROW_RIGHT  = 0x4D,
+    
+    K_END  = 0x4F,
+    K_ARROW_DOWN  = 0x50,
+    K_PG_DOWN  = 0x51,
+    K_PAD_INSERT  = 0x52,
+    K_PAD_DELETE  = 0x53
+    
+};
+
+
+
+static const char lower_base_keymap[89] = 
+{
+    '\0', '\0' /* ESCAPE */,
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+	'-',
+    '=',
+    '\b',
+    '\t',
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',  '\n',
+    '\0', //ctrl
+    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`',
+	'\0', // Left shift
+	'\\',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/',
+    '\0', //right shift
+    '*' /* numpad '*' */,
+	'\0', // left alt
+	' ', //space
+	'\0', //capslocks in
+    '\0',/*F1*/ '\0',/* F2*/ '\0',/* F3*/ '\0',/* F4*/ '\0',/* F5*/ '\0',/* F6*/ '\0',/* F7*/ '\0',/* F8*/ '\0',/* F9*/ '\0',/* F10*/
+    '\0',/* number lock */ '\0',//  scroll lock
+    '7', '8', '9',  '-', '4', '5', '6', '+', '1', '2', '3', '0', // all numpad
+    '.',
+    '\0',// None
+    '\0',// None
+    '\0',// None
+    '\0',// F11
+    '\0',// F12
+};
+
+static const char upper_base_keymap[89] = 
+{
+    '\0', '\0' /* ESCAPE */,
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
+	'_',
+    '+',
+    '\b',
+    '\t',
+    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}',  '\n',
+    '\0', //ctrl
+    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', '~',
+	'\0', // Left shift
+	'|',
+    'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?',
+    '\0', //right shift
+    '*' /* numpad '*' */,
+	'\0', // left alt
+	' ', //space
+	'\0', //capslocks in
+    '\0',/*F1*/ '\0',/* F2*/ '\0',/* F3*/ '\0',/* F4*/ '\0',/* F5*/ '\0',/* F6*/ '\0',/* F7*/ '\0',/* F8*/ '\0',/* F9*/ '\0',/* F10*/
+    '\0',/* number lock */ '\0',//  scroll lock
+    '7', '8', '9',  '-', '4', '5', '6', '+', '1', '2', '3', '0', // all numpad
+    '.',
+    '\0',// None
+    '\0',// None
+    '\0',// None
+    '\0',// F11
+    '\0',// F12
+};
 
 // char keymap[] = 
 // {

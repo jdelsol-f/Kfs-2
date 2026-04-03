@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 15:57:48 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 18:31:59 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:49:45 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static void term_delchar(t_general_struct *data)
 void term_putchar(char c) 
 {
 	t_general_struct *data = get_data(NULL);
+	
 	if (c == '\b')
 		term_delchar(data);
 	else if (c != '\n')
 		term_putentryat(c, data->term_color, data->col, data->row);
+		
 	data->col++;
 	if (data->col >= VGA_WIDTH || c == '\n') {
 		data->col = 0;
@@ -123,12 +125,15 @@ void term_write_all(int type, void* things)
 	case STRING:
 		term_writestring((char *)things);
 		break;
+		
 	case INTEGER:
 		term_writeint((int)things);
 		break;
+		
 	case HEXADECIMAL:
 		term_writehex((unsigned)things);
 		break;
+		
 	default:
 		break;
 	}
