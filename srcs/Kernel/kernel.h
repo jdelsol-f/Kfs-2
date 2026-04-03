@@ -7,17 +7,4 @@
 # include "Write_functions/write_functions.h"
 # include "IO/io.h"
 
-/* type vars */
-
-
-
-typedef enum e_bool
-{
-    true = 1,
-    false = 0
-}   t_bool;
-
-
-
-
 #endif

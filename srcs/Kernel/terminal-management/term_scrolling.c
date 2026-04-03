@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:33:31 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 19:47:24 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:36:47 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void term_scrolling(uint8_t term_color)
 			(TERM_BUFFER)[index] = vga_entry(' ', term_color);
 	}
 }
-
 
 
 #endif

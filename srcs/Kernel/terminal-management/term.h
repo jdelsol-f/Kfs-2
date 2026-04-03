@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:36:39 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 20:02:45 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:10:52 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 
 /* sys vars */
 
-# define VGA_WIDTH   80
-# define VGA_HEIGHT  25
-# define VGA_MEMORY  0xB8000
-# define VGA_COLS VGA_WIDTH
-# define VGA_ROWS VGA_HEIGHT
+
 
 # ifndef TERM_BUFFER
 #  define TERM_BUFFER (uint16_t*)VGA_MEMORY

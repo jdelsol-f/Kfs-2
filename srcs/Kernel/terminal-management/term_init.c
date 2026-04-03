@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:29:18 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 19:44:05 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:28:10 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void term_init(t_general_struct *data)
 		{
 			const size_t index = (VGA_COLS * row) + col;
 			(TERM_BUFFER)[index] = vga_entry(' ', data->term_color);
-		} 
+		}
 	}
 }
 

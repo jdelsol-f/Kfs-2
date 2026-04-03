@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 15:57:48 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 19:47:56 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:31:59 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,32 @@ void term_putentryat(char c, uint8_t color, size_t col, size_t row)
 	(TERM_BUFFER)[index] = vga_entry(c, color);
 }
 
+static void term_delchar(t_general_struct *data)
+{
+	if (data->col == 0)
+	{
+		data->col-=1;
+		return;
+	}
+	for (int col = data->col; col < VGA_HEIGHT * VGA_WIDTH; col ++)
+	{
+		const size_t index1 = (VGA_WIDTH * data->row) + col;
+		const size_t index2 = (VGA_WIDTH * data->row) + (col - 1);
+		(TERM_BUFFER)[index2] = (TERM_BUFFER)[index1];
+	}
+	const size_t index = (VGA_WIDTH * (VGA_HEIGHT - 1)) + VGA_WIDTH - 1;
+	(TERM_BUFFER)[index] = vga_entry(' ', data->term_color);
+		data->col-=2;
+	
+}
+
 void term_putchar(char c) 
 {
 	t_general_struct *data = get_data(NULL);
-	term_putentryat(c, data->term_color, data->col, data->row);
+	if (c == '\b')
+		term_delchar(data);
+	else if (c != '\n')
+		term_putentryat(c, data->term_color, data->col, data->row);
 	data->col++;
 	if (data->col >= VGA_WIDTH || c == '\n') {
 		data->col = 0;
@@ -29,10 +51,8 @@ void term_putchar(char c)
 
 		if (data->row == VGA_HEIGHT)
 		{
-			// term_row = 0;
 			term_scrolling(data->term_color);
 			data->row--;
-			//note to add, for the multi-screen, multi-buffer for each screen that works as extention of the last one
 		}
 	}
 }

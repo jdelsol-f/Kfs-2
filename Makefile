@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/03/28 19:49:00 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/04/03 16:01:40 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	../srcs/BootLoader/start.s \
 		 ../srcs/Kernel/Colors/colors.c \
 		 ../srcs/Kernel/IO/cursor.c \
 		 ../srcs/Kernel/IO/io.c \
+		 ../srcs/Kernel/IO/keytab.c \
 		 ../srcs/Kernel/Printf/printf.c \
 		 ../srcs/Kernel/terminal-management/term_init.c \
 		 ../srcs/Kernel/terminal-management/term_scrolling.c \
@@ -34,6 +35,7 @@ SRCS.O = ../${OUTPUT_DIR}/start.o \
 		 ../${OUTPUT_DIR}/colors.o \
 		 ../${OUTPUT_DIR}/cursor.o \
 		 ../${OUTPUT_DIR}/io.o \
+		 ../${OUTPUT_DIR}/keytab.o \
 		 ../${OUTPUT_DIR}/printf.o \
 		 ../${OUTPUT_DIR}/term_init.o \
 		 ../${OUTPUT_DIR}/term_scrolling.o \
