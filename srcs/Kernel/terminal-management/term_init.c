@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:29:18 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 18:28:10 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:19:07 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void term_init(t_general_struct *data)
 	enable_cursor(0, VGA_ROWS);
     
 	data->term_color = vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK);
+	data->term_one.term_color = vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK);
+	data->term_two.term_color = vga_entry_color(VGA_COLOR_PINK, VGA_COLOR_YELLOW);
 
     //multi screens support
-	ft_chrset(data->term_one.buffer, vga_entry(' ', data->term_color), VGA_COLS * VGA_ROWS);
-	ft_chrset(data->term_two.buffer, vga_entry(' ', data->term_color), VGA_COLS * VGA_ROWS);
+	ft_chrset(data->term_one.buffer, vga_entry(' ', data->term_one.term_color), VGA_COLS * VGA_ROWS);
+	ft_chrset(data->term_two.buffer, vga_entry(' ', data->term_two.term_color), VGA_COLS * VGA_ROWS);
 	data->term_one.col = 0;
 	data->term_one.row = 0;
 	data->term_two.col = 0;

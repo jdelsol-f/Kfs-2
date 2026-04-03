@@ -28,6 +28,7 @@ typedef struct s_screen
     uint16_t buffer[2125];
     int col;
     int row;
+    uint8_t term_color;
 }t_screen;   
 
 typedef struct s_general_struct //reminder to find an appropriate name

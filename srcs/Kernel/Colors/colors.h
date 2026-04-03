@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:09:24 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 20:00:52 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:18:57 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ enum vga_color {
 	VGA_COLOR_LIGHT_GREEN = 10,
 	VGA_COLOR_LIGHT_CYAN = 11,
 	VGA_COLOR_LIGHT_RED = 12,
-	VGA_COLOR_LIGHT_MAGENTA = 13,
-	VGA_COLOR_LIGHT_BROWN = 14,
+	VGA_COLOR_PINK = 13,
+	VGA_COLOR_YELLOW = 14,
 	VGA_COLOR_WHITE = 15,
 };
 

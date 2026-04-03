@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:55:58 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 19:05:46 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:11:53 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,18 +230,22 @@ void kernel_main()
 				ft_chrcpy(data.term_two.buffer, TERM_BUFFER, VGA_COLS * VGA_ROWS);
 				data.term_two.col = data.col;
 				data.term_two.row = data.row;
+				data.term_two.term_color = data.term_color;
 				ft_chrcpy(TERM_BUFFER, data.term_one.buffer, VGA_COLS * VGA_ROWS);
 				data.row = data.term_one.row;
 				data.col = data.term_one.col;
+				data.term_color = data.term_one.term_color;
 			}
 			else
 			{
 				ft_chrcpy(data.term_one.buffer, TERM_BUFFER, VGA_COLS * VGA_ROWS);
 				data.term_one.col = data.col;
 				data.term_one.row = data.row;
+				data.term_one.term_color = data.term_color;
 				ft_chrcpy(TERM_BUFFER, data.term_two.buffer, VGA_COLS * VGA_ROWS);
 				data.row = data.term_two.row;
 				data.col = data.term_two.col;
+				data.term_color = data.term_two.term_color;
 			}
 			data.buff_indicator = !data.buff_indicator;
 			update_cursor();
