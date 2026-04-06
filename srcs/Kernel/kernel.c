@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kernel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:55:58 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 19:56:22 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:21:44 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void main()
 	{
 		
 		uint8_t scancode = keyboard_read_input();
-
 		if (scancode == CTRL)
 		{
 			if (data.buff_indicator)
@@ -81,7 +80,7 @@ void main()
 			E0 = false;
 		}
 		else if (scancode == 0xE0)
-			E0 == true;
+			E0 = true;
 			
 		else if (scancode == LEFT_SHIFT)
 			shift1 = true;
