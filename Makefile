@@ -47,10 +47,13 @@ DEFAULT_FLAGS = -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nod
 
 all: compile grub-setup start
 
+${OUTPUT_DIR} :
+	mkdir CompiledFiles
+
 start: 
 	qemu-system-i386 -cdrom ${OUTPUT_DIR}/${OS}.iso 
 
-compile:	
+compile:	${OUTPUT_DIR}
 		cd CompiledFiles && ${CC} ${DEFAULT_FLAGS} -std=gnu99 -ffreestanding -g -c ${SRCS} && \
 		${CC} -T ${LINKER} -o $(KERNEL).elf ${DEFAULT_FLAGS} -ffreestanding -g ${SRCS.O} -lgcc 
 	 
