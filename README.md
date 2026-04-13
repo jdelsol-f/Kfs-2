@@ -1,11 +1,10 @@
-# KFS-1
+# KFS-2
 
 ## Infomation
 
-KFS-1 is a 42 introduction project to kernel coding and light bootloader management around GRUB.
-The goal was to make a simple kernel in the language we wanted (we chosen C) with an asm bootable base to enable a multiboot header as asked.
-This kernel can only print text and will by default print 42 for the mandatory part.
-Then we have the bonus part, with scroll plus cursor support, colors support, a new helper like printf or printk (printf in our case), keyboard entries Handling plus printing and different screens handling with a shortcut.
+KFS-2 is a 42 introduction project following KFS-1. Its goal is to code a GDT table, a stack and a little shell with few useful builtin commands
+This kernel will manage the stack plus the GDT and will by default print 42.
+Then we have the bonus part, where we made a shell with very few features like with only some builtin command to debug, shut down or reboot
 
 ## Commande
 
