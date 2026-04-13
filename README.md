@@ -23,6 +23,9 @@ Launch the kernel alone, outside the iso for basic testing.
 #### Make grub-setup
 Create the ISO file from compiled code.
 
+#### Make nix
+Start the nix env for project
+
 #### Make clean
 Remove temporary file made for the compilation.
 

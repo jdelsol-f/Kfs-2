@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/04/03 19:55:59 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/04/13 17:28:33 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRCS.O = ../${OUTPUT_DIR}/start.o \
 
 LINKER = ../srcs/Linker/linker.ld
 
+NIX_ENV = ./Kfs-env.nix
+
 CC = i686-elf-gcc
 
 DEFAULT_FLAGS = -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs
@@ -65,6 +67,9 @@ grub-update:
 
 grub-setup: grub-update
 	grub-mkrescue ./IsoDir -o ${OUTPUT_DIR}/$(OS).iso
+
+nix:
+	nix-shell ${NIX_ENV}
 
 clean: 
 	rm -rf ./${OUTPUT_DIR}/*.o
