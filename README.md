@@ -25,10 +25,10 @@ Launch the kernel alone, outside the iso for basic testing.
 Create the ISO file from compiled code.
 
 #### Make clean
-    Remove temporary file made for the compilation.
+Remove temporary file made for the compilation.
 
 #### Make fclean
-    Remove all files create by other rules.
+Remove all files create by other rules.
 
 
 ## Contributor
