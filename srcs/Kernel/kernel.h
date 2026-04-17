@@ -6,5 +6,6 @@
 # include "terminal-management/term.h"
 # include "Write_functions/write_functions.h"
 # include "IO/io.h"
+# include "GDT/gdt.h"
 
 #endif

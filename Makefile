@@ -6,7 +6,7 @@
 #    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/04/13 17:28:33 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/04/17 14:34:18 by jdelsol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS =	../srcs/BootLoader/start.s \
 		 ../srcs/Kernel/Printf/printf.c \
 		 ../srcs/Kernel/terminal-management/term_init.c \
 		 ../srcs/Kernel/terminal-management/term_scrolling.c \
-		 ../srcs/Kernel/Write_functions/write_functions.c 
+		 ../srcs/Kernel/Write_functions/write_functions.c \
+		 ../srcs/Kernel/GDT/gdt.c
 
 
 SRCS.O = ../${OUTPUT_DIR}/start.o \
@@ -37,7 +38,8 @@ SRCS.O = ../${OUTPUT_DIR}/start.o \
 		 ../${OUTPUT_DIR}/printf.o \
 		 ../${OUTPUT_DIR}/term_init.o \
 		 ../${OUTPUT_DIR}/term_scrolling.o \
-		 ../${OUTPUT_DIR}/write_functions.o 
+		 ../${OUTPUT_DIR}/write_functions.o \
+		 ../${OUTPUT_DIR}/gdt.o
 
 LINKER = ../srcs/Linker/linker.ld
 
@@ -70,6 +72,8 @@ grub-setup: grub-update
 
 nix:
 	nix-shell ${NIX_ENV}
+
+gdt:
 
 clean: 
 	rm -rf ./${OUTPUT_DIR}/*.o

@@ -6,7 +6,7 @@
 /*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:33:16 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/03/28 19:10:36 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:28:31 by jdelsol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,17 @@ static int	ft_write_hexa(char str, va_list *parameter)
 	{
 		if (!ui)
         {
-            term_writestring("(nil)");
+            term_writestring("(nil)"); 
             return (5);
         }
 		term_writestring("0x");
 		return (ft_hexa(ui, 1) + 2);
+	}
+	else if (str == 'h')
+	{
+		if (!(unsigned short)ui)
+			return (ft_z_case());
+		return (ft_hexa((unsigned short) ui, 1));
 	}
 	else
 	{
@@ -150,7 +156,7 @@ static int	ft_parameter_analysis_system(const char *str, va_list *parameter)
 		return (ft_write_char(parameter));
 	else if (*str == 's')
 		return (ft_write_str(parameter));
-	else if (*str == 'x' || *str == 'X' || *str == 'p')
+	else if (*str == 'x' || *str == 'X' || *str == 'p' || *str == 'h')
 		return (ft_write_hexa(*str, parameter));
 	else
 	{

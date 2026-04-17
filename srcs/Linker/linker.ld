@@ -8,33 +8,24 @@ SECTIONS
 	/* This is because memory below 1 Megabyte is reserved for other x86-related things, so we can't use it */
 	. = 1M;
 
-	/* We align all sections in the executable at multiples of 4 Kilobytes (4K). This will become useful later in development when we add paging */
-
-	/* First put the multiboot header, as it's required to be near the start of the executable otherwise the bootloader won't find it */
-	/* The Multiboot header is Read-Only data, so we can put it in a '.rodata' section. */
-
-	/* Executable code */
-
 	. = 0x00000800;
 	.gdt :
 	{
-		*(.gdt)
+		KEEP(*(.gdt))
 	}
 
-	. = 0x10000;
+	. = 0x100000;
 	.text :
 	{
 		*(.multiboot)
 		*(.text)
 	}
 
-	. = 0x20000;
 	.data :
 	{
 		*(.data)
 	}
 
-	. = 0x30000;
 	.bss :
 	{
 		*(.bss)

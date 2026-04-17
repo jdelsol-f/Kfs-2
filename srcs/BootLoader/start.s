@@ -1,7 +1,8 @@
 .extern main
 .extern stack_top
 .global start
- 
+.global gdt_start
+
 .set MB_MAGIC, 0x1BADB002 
 .set MB_FLAGS, (1 << 0) | (1 << 1)
 .set MB_CHECKSUM, (0 - (MB_MAGIC + MB_FLAGS))
@@ -12,9 +13,14 @@
 	.long MB_FLAGS
 	.long MB_CHECKSUM
 
-.section .gdt
+.section .bss
+	
+	.align 16
+	stack_bottom:
+		.skip 16384
+	stack_top:
 
-lgdt [gdt_register]
+lgdt [gdt_ptr]
 reloadSegments:
 	ljmp $0x08, $.reload_CS
 .reload_CS:
@@ -25,69 +31,70 @@ reloadSegments:
 	mov %gs, %ax
 	mov %ss, %ax
 	ret
-
+.section .gdt
 gdt_start:
 	.word 0x0
 	.word 0x0
 	.word 0x0
 	.word 0x0
-gdt_kernel_code:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0x9A  
-	.byte 0xC
-	.byte 0x0
+
+gdt_kernel_code:	
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0x9A		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
+
 
 gdt_kernel_data:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0x92
-	.byte 0xC
-	.byte 0x0
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0x92		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
+
 gdt_kernel_stack:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0x82 	
-	.byte 0xC
-	.byte 0x0
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0x82		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
+
 gdt_user_code:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0xFA	
-	.byte 0xC
-	.byte 0x0
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0xFA		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
+
 gdt_user_data:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0xF2 
-	.byte 0xC
-	.byte 0x0
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0xF2 		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
+
 gdt_user_stack:
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0xE2
-	.byte 0xC
-	.byte 0x0
+	.word 0xffff	//limit
+	.word 0x0		//base
+	.byte 0x0		//limit_middle
+	.byte 0xE2		//access_byte
+	.byte 0xC		//flags
+	.byte 0x0		//end_byte for the 32bits format
 
 gdt_end:
 
-gdt_register:
-	.word 0
-	.long 0
+gdt_ptr:
+	.word gdt_end - gdt_start - 1
+	.long gdt_start
 
+ 
 
-.section .bss
-	
-	.align 16
-	stack_bottom:
-		.skip 16384
-	stack_top:
 
 .section .text
 	
@@ -95,8 +102,8 @@ gdt_register:
 		mov $stack_top, %esp
  
 		call main
+		cli
  
 		hang:
-			cli
 			hlt
 			jmp hang
