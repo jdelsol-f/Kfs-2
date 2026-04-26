@@ -7,16 +7,18 @@ SECTIONS
 	/* Begin putting sections at 1 Megabyte (1M), a good place for kernels to be loaded at by the bootloader. */
 	/* This is because memory below 1 Megabyte is reserved for other x86-related things, so we can't use it */
 
-
 	. = 0x100;
 	.multiboot : {
 		*(.multiboot)
+		. = ALIGN(16);
 	}
 
 	/* put gdt section at 0x800 */
 	. = 0x800;
 	.gdt : {
+		
 		KEEP(*(.gdt))
+		. = ALIGN(64);
 	}
 
 	/* text section begin at 0x100000 */

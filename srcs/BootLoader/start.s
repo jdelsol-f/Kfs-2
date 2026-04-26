@@ -1,7 +1,7 @@
 
 
-.set MB_MAGIC, 0x1BADB002 
-.set MB_FLAGS, (1 << 0) | (1 << 1)
+.set MB_MAGIC, 0x1BADB002 //0x36D76289
+.set MB_FLAGS, 0x00000003
 .set MB_CHECKSUM, (0 - (MB_MAGIC + MB_FLAGS))
 
 .section .multiboot
@@ -11,46 +11,6 @@ mb_header:
 	.long MB_FLAGS
 	.long MB_CHECKSUM
 
-
-
-.extern main
-
-.global start
-.global gdt_start
-
-
-
-.section .text
-
-
-lgdt [gdt_ptr]
-
-ljmp $0x08, $.reload_CS
-.reload_CS:
-	mov %ax, 0x10
-	mov	%ds, %ax
-	mov %es, %ax
-	mov %fs, %ax
-	mov %gs, %ax
-	mov %ss, %ax
-	ret
-
-start:
-	mov $stack_top, %esp
-	call main
-	cli
-
-	hang:
-		hlt
-		jmp hang
-
-
-.section .bss
-	
-	.align 16
-	stack_bottom:
-		.skip 16384
-	stack_top:
 
 .section .gdt
 gdt_start:
@@ -115,5 +75,38 @@ gdt_ptr:
 	.long gdt_start
 
  
+.section .text
 
+
+lgdt [gdt_ptr]
+
+ljmp $0x08, $.reload_CS
+.reload_CS:
+	mov %ax, 0x10
+	mov	%ds, %ax
+	mov %es, %ax
+	mov %fs, %ax
+	mov %gs, %ax
+	mov %ss, %ax
+	ret
+
+.extern main
+.global start
+.global gdt_start
+start:
+	mov $stack_top, %esp
+	call main
+	cli
+
+	hang:
+		hlt
+		jmp hang
+
+
+.section .bss
+	
+	.align 16
+	stack_bottom:
+		.skip 16384
+	stack_top:
 

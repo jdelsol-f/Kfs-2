@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:40:48 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/26 13:21:10 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:13:34 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void GetGdt(t_gdt *gdt)
 	// ft_printf("user code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", user_code[0], user_code[1], user_code[2], user_code[3], user_code[4], user_code[5], user_code[6], user_code[7]);
 	// ft_printf("user data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", user_data[0], user_data[1], user_data[2], user_data[3], user_data[4], user_data[5], user_data[6], user_data[7]);
 	// ft_printf("user stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", user_stack[0], user_stack[1], user_stack[2], user_stack[3], user_stack[4], user_stack[5], user_stack[6], user_stack[7]);
-	
 }
 

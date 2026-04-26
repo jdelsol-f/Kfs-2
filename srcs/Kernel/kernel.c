@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:55:58 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/26 13:14:38 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:42:34 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void main()
 	bool numlock = false;
 	bool E0 = false;
 
-	char testtab[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	get_data(&data);
 	term_init(&data);
 	update_cursor(&data);
@@ -48,17 +47,11 @@ void main()
 	ft_printf("GDT(%p):\n\n", my_gdt.addr);	
 	ft_printf("start:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.start[0], my_gdt.start[1], my_gdt.start[2], my_gdt.start[3], my_gdt.start[4], my_gdt.start[5], my_gdt.start[6], my_gdt.start[7]);
 	ft_printf("kernel code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_code[0], my_gdt.kernel_code[1], my_gdt.kernel_code[2], my_gdt.kernel_code[3], my_gdt.kernel_code[4], my_gdt.kernel_code[5], my_gdt.kernel_code[6], my_gdt.kernel_code[7]);
-	
-	term_putchar(testtab[(my_gdt.kernel_code[0] / 16)]);
-	term_putchar(testtab[(my_gdt.kernel_code[0] % 16)]);
-	term_putchar('\n');
-	update_cursor(&data);
-	ft_printf("kerbelcode(%p)\n", my_gdt.kernel_code);	
-	// ft_printf("kernel data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_data[0], my_gdt.kernel_data[1], my_gdt.kernel_data[2], my_gdt.kernel_data[3], my_gdt.kernel_data[4], my_gdt.kernel_data[5], my_gdt.kernel_data[6], my_gdt.kernel_data[7]);
-	// ft_printf("kernel stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_stack[0], my_gdt.kernel_stack[1], my_gdt.kernel_stack[2], my_gdt.kernel_stack[3], my_gdt.kernel_stack[4], my_gdt.kernel_stack[5], my_gdt.kernel_stack[6], my_gdt.kernel_stack[7]);
-	// ft_printf("user code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_code[0], my_gdt.user_code[1], my_gdt.user_code[2], my_gdt.user_code[3], my_gdt.user_code[4], my_gdt.user_code[5], my_gdt.user_code[6], my_gdt.user_code[7]);
-	// ft_printf("user data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_data[0], my_gdt.user_data[1], my_gdt.user_data[2], my_gdt.user_data[3], my_gdt.user_data[4], my_gdt.user_data[5], my_gdt.user_data[6], my_gdt.user_data[7]);
-	// ft_printf("user stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_stack[0], my_gdt.user_stack[1], my_gdt.user_stack[2], my_gdt.user_stack[3], my_gdt.user_stack[4], my_gdt.user_stack[5], my_gdt.user_stack[6], my_gdt.user_stack[7]);
+	ft_printf("kernel data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_data[0], my_gdt.kernel_data[1], my_gdt.kernel_data[2], my_gdt.kernel_data[3], my_gdt.kernel_data[4], my_gdt.kernel_data[5], my_gdt.kernel_data[6], my_gdt.kernel_data[7]);
+	ft_printf("kernel stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_stack[0], my_gdt.kernel_stack[1], my_gdt.kernel_stack[2], my_gdt.kernel_stack[3], my_gdt.kernel_stack[4], my_gdt.kernel_stack[5], my_gdt.kernel_stack[6], my_gdt.kernel_stack[7]);
+	ft_printf("user code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_code[0], my_gdt.user_code[1], my_gdt.user_code[2], my_gdt.user_code[3], my_gdt.user_code[4], my_gdt.user_code[5], my_gdt.user_code[6], my_gdt.user_code[7]);
+	ft_printf("user data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_data[0], my_gdt.user_data[1], my_gdt.user_data[2], my_gdt.user_data[3], my_gdt.user_data[4], my_gdt.user_data[5], my_gdt.user_data[6], my_gdt.user_data[7]);
+	ft_printf("user stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_stack[0], my_gdt.user_stack[1], my_gdt.user_stack[2], my_gdt.user_stack[3], my_gdt.user_stack[4], my_gdt.user_stack[5], my_gdt.user_stack[6], my_gdt.user_stack[7]);
 	
 	// keyboard and multi-screen support
 	int itest = 0;
