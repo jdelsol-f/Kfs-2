@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gdt.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:41:03 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/17 16:33:08 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/26 11:48:15 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_gdt
     uint8_t *user_stack;
     
 }   t_gdt;
+
+
 
 void GetGdt(t_gdt *gdt);
 

@@ -1,28 +1,31 @@
-.extern main
-.extern stack_top
-.global start
-.global gdt_start
+
 
 .set MB_MAGIC, 0x1BADB002 
 .set MB_FLAGS, (1 << 0) | (1 << 1)
 .set MB_CHECKSUM, (0 - (MB_MAGIC + MB_FLAGS))
 
 .section .multiboot
+mb_header:
 	.align 4
 	.long MB_MAGIC
 	.long MB_FLAGS
 	.long MB_CHECKSUM
 
-.section .bss
-	
-	.align 16
-	stack_bottom:
-		.skip 16384
-	stack_top:
+
+
+.extern main
+
+.global start
+.global gdt_start
+
+
+
+.section .text
+
 
 lgdt [gdt_ptr]
-reloadSegments:
-	ljmp $0x08, $.reload_CS
+
+ljmp $0x08, $.reload_CS
 .reload_CS:
 	mov %ax, 0x10
 	mov	%ds, %ax
@@ -31,6 +34,24 @@ reloadSegments:
 	mov %gs, %ax
 	mov %ss, %ax
 	ret
+
+start:
+	mov $stack_top, %esp
+	call main
+	cli
+
+	hang:
+		hlt
+		jmp hang
+
+
+.section .bss
+	
+	.align 16
+	stack_bottom:
+		.skip 16384
+	stack_top:
+
 .section .gdt
 gdt_start:
 	.word 0x0
@@ -96,14 +117,3 @@ gdt_ptr:
  
 
 
-.section .text
-	
-	start:
-		mov $stack_top, %esp
- 
-		call main
-		cli
- 
-		hang:
-			hlt
-			jmp hang

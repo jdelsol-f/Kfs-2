@@ -3,27 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   gdt.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:40:48 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/17 17:06:29 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:21:10 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gdt.h"
 
+
+
 void GetGdt(t_gdt *gdt)
 {
-    extern uint16_t *gdt_start;
+    extern uint8_t gdt_start;
+
+    gdt->addr =          NULL;
+    gdt->start =        NULL;
+    gdt->kernel_code =  NULL;
+    gdt->kernel_data =  NULL;
+    gdt->kernel_stack = NULL;
+    gdt->user_code =    NULL;
+    gdt->user_data =    NULL;
+    gdt->user_stack =   NULL;
     
-    // gdt->addr =          &gdt_start;
-    // *gdt->start =        &gdt->addr[0];
-    // *gdt->kernel_code =  &gdt->addr[8];
-    // *gdt->kernel_data =  &gdt->addr[16];
-    // *gdt->kernel_stack = &gdt->addr[24];
-    // *gdt->user_code =    &gdt->addr[32];
-    // *gdt->user_data =    &gdt->addr[40];
-    // *gdt->user_stack =   &gdt->addr[48];
+    gdt->addr =          &gdt_start;
+    gdt->start =        gdt->addr;
+    gdt->kernel_code =  &gdt->addr[8];
+    gdt->kernel_data =  &gdt->addr[16];
+    gdt->kernel_stack = &gdt->addr[24];
+    gdt->user_code =    &gdt->addr[32];
+    gdt->user_data =    &gdt->addr[40];
+    gdt->user_stack =   &gdt->addr[48];
 
     // uint8_t *addr =         &gdt_start;
     // uint16_t *lol =         &gdt_start;
@@ -35,8 +46,8 @@ void GetGdt(t_gdt *gdt)
     // uint8_t *user_data =    &addr[40];
     // uint8_t *user_stack =   &addr[48];
 
-    for (int i = 0; i < 48; i++)
-        ft_printf("- (%x) ", gdt_start[i]);	
+    // for (int i = 0; i < 48; i++)
+    //     ft_printf("- (%x) ", gdt_start[i]);	
 	// ft_printf("start:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", start[0], start[1], start[2], start[3], start[4], start[5], start[6], start[7]);
 	// ft_printf("kernel code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", kernel_code[0], kernel_code[1], kernel_code[2], kernel_code[3], kernel_code[4], kernel_code[5], kernel_code[6], kernel_code[7]);
 	// ft_printf("kernel data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", kernel_data[0], kernel_data[1], kernel_data[2], kernel_data[3], kernel_data[4], kernel_data[5], kernel_data[6], kernel_data[7]);
