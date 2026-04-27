@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+         #
+#    By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/13 13:40:58 by jdelsol-          #+#    #+#              #
-#    Updated: 2026/04/17 14:34:18 by jdelsol-         ###   ########.fr        #
+#    Updated: 2026/04/27 14:02:24 by lflandri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS =	../srcs/BootLoader/start.s \
 		 ../srcs/Kernel/terminal-management/term_init.c \
 		 ../srcs/Kernel/terminal-management/term_scrolling.c \
 		 ../srcs/Kernel/Write_functions/write_functions.c \
-		 ../srcs/Kernel/GDT/gdt.c
+		 ../srcs/Kernel/GDT/gdt.c \
+		 ../srcs/Kernel/Console/command.c \
+		 ../srcs/Kernel/Console/console.c
 
 
 SRCS.O = ../${OUTPUT_DIR}/start.o \
@@ -39,7 +41,9 @@ SRCS.O = ../${OUTPUT_DIR}/start.o \
 		 ../${OUTPUT_DIR}/term_init.o \
 		 ../${OUTPUT_DIR}/term_scrolling.o \
 		 ../${OUTPUT_DIR}/write_functions.o \
-		 ../${OUTPUT_DIR}/gdt.o
+		 ../${OUTPUT_DIR}/gdt.o \
+		 ../${OUTPUT_DIR}/command.o \
+		 ../${OUTPUT_DIR}/console.o
 
 LINKER = ../srcs/Linker/linker.ld
 

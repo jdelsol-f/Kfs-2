@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   numpad_SCK.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:56:26 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 19:37:36 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/27 12:58:48 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "io.h"
 #include "../Write_functions/write_functions.h"
+#include "../Console/console.h"
 
 void ft_arrows(int *col,  int *row, int direction)
 {
@@ -145,7 +146,7 @@ void ft_E0_KEY(uint8_t scancode, t_general_struct *data)
 		term_putchar('/');
 		break;
 	case K_PAD_PAD_ENTER:
-		term_putchar('\n');
+		execute_command(data);
 		break;
 
 	default:

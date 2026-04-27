@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:33:16 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/17 16:28:31 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:08:03 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static unsigned int	ft_strlen(const char *str)
 static int	ft_z_case(void)
 {
     term_writestring("0");
+	return (1);
+}
+
+static int	ft_z_case2(void)
+{
+    term_writestring("00");
 	return (1);
 }
 
@@ -130,7 +136,9 @@ static int	ft_write_hexa(char str, va_list *parameter)
 	else if (str == 'h')
 	{
 		if (!(unsigned short)ui)
-			return (ft_z_case());
+			return (ft_z_case2());
+		if ((unsigned short)ui / 16 == 0)
+			term_writestring("0");
 		return (ft_hexa((unsigned short) ui, 1));
 	}
 	else

@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gdt.h                                              :+:      :+:    :+:   */
+/*   console.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 11:41:03 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/27 14:11:39 by lflandri         ###   ########.fr       */
+/*   Created: 2026/04/27 12:53:54 by lflandri          #+#    #+#             */
+/*   Updated: 2026/04/27 14:30:49 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GDT_H
-# define GDT_H
+#ifndef CONSOLE_H
+# define CONSOLE_H
+# include "../type.h"
 
-#include "../type.h"
 
-void GetGdt(t_gdt *gdt);
+
+
+//console function
+void	updatePromptPos(t_general_struct *data);
+void	execute_command(t_general_struct *data);
+void	setpromptready(t_general_struct *data);
+
+//command
+
+void clear(t_general_struct *data);
+void getgdt(t_general_struct *data);
+void echo(t_general_struct *data, char *buffer);
+
+
 
 #endif

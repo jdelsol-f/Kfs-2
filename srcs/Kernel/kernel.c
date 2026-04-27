@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:55:58 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/26 14:42:34 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 14:16:00 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,51 +22,31 @@ int	ft_isalpha(int c)
 	return (1);
 }
 
-extern void reloadSegments();
-
 void main()
 {
 	
 	t_general_struct data;
-	t_gdt	my_gdt;
 	bool shift1 = false;
 	bool shift2 = false;
 	bool capslock = false;
 	bool numlock = false;
 	bool E0 = false;
+	bool second_init = false;
 
 	get_data(&data);
 	term_init(&data);
 	update_cursor(&data);
-	GetGdt(&my_gdt);
+	GetGdt(&(data.my_gdt));
 	// mandatory part
 	// ft_printf("%i\n", 42);
 
 	// gdt display
-
-	ft_printf("GDT(%p):\n\n", my_gdt.addr);	
-	ft_printf("start:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.start[0], my_gdt.start[1], my_gdt.start[2], my_gdt.start[3], my_gdt.start[4], my_gdt.start[5], my_gdt.start[6], my_gdt.start[7]);
-	ft_printf("kernel code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_code[0], my_gdt.kernel_code[1], my_gdt.kernel_code[2], my_gdt.kernel_code[3], my_gdt.kernel_code[4], my_gdt.kernel_code[5], my_gdt.kernel_code[6], my_gdt.kernel_code[7]);
-	ft_printf("kernel data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_data[0], my_gdt.kernel_data[1], my_gdt.kernel_data[2], my_gdt.kernel_data[3], my_gdt.kernel_data[4], my_gdt.kernel_data[5], my_gdt.kernel_data[6], my_gdt.kernel_data[7]);
-	ft_printf("kernel stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.kernel_stack[0], my_gdt.kernel_stack[1], my_gdt.kernel_stack[2], my_gdt.kernel_stack[3], my_gdt.kernel_stack[4], my_gdt.kernel_stack[5], my_gdt.kernel_stack[6], my_gdt.kernel_stack[7]);
-	ft_printf("user code:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_code[0], my_gdt.user_code[1], my_gdt.user_code[2], my_gdt.user_code[3], my_gdt.user_code[4], my_gdt.user_code[5], my_gdt.user_code[6], my_gdt.user_code[7]);
-	ft_printf("user data:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_data[0], my_gdt.user_data[1], my_gdt.user_data[2], my_gdt.user_data[3], my_gdt.user_data[4], my_gdt.user_data[5], my_gdt.user_data[6], my_gdt.user_data[7]);
-	ft_printf("user stack:\n    -%h -%h -%h -%h\n    -%h -%h -%h -%h\n", my_gdt.user_stack[0], my_gdt.user_stack[1], my_gdt.user_stack[2], my_gdt.user_stack[3], my_gdt.user_stack[4], my_gdt.user_stack[5], my_gdt.user_stack[6], my_gdt.user_stack[7]);
+	getgdt(&data);
+	//print first prompt :
 	
+	setpromptready(&data);
+
 	// keyboard and multi-screen support
-	int itest = 0;
-	while (true)
-	{
-		if (my_gdt.kernel_code[itest] != 0)
-		{
-			ft_printf("test (%i)\n", my_gdt.kernel_code[itest]);
-			ft_printf("test addr (%p)\n", &my_gdt.kernel_code[itest]);
-			break;
-		}
-		itest++;
-	}
-	
-
 	while (true)
 	{
 		
@@ -79,11 +59,15 @@ void main()
 				data.term_two.col = data.col;
 				data.term_two.row = data.row;
 				data.term_two.term_color = data.term_color;
+				data.term_two.prompt.col = data.term_prompt.col;
+				data.term_two.prompt.row = data.term_prompt.row;
 
 				ft_chrcpy(TERM_BUFFER, data.term_one.buffer, VGA_COLS * VGA_ROWS);
 				data.row = data.term_one.row;
 				data.col = data.term_one.col;
 				data.term_color = data.term_one.term_color;
+				data.term_prompt.col = data.term_one.prompt.col;
+				data.term_prompt.row = data.term_one.prompt.row;
 			}
 			else
 			{
@@ -91,15 +75,25 @@ void main()
 				data.term_one.col = data.col;
 				data.term_one.row = data.row;
 				data.term_one.term_color = data.term_color;
+				data.term_one.prompt.col = data.term_prompt.col;
+				data.term_one.prompt.row = data.term_prompt.row;
 
 				ft_chrcpy(TERM_BUFFER, data.term_two.buffer, VGA_COLS * VGA_ROWS);
 				data.row = data.term_two.row;
 				data.col = data.term_two.col;
 				data.term_color = data.term_two.term_color;
+				data.term_prompt.col = data.term_two.prompt.col;
+				data.term_prompt.row = data.term_two.prompt.row;
 			}
 			data.buff_indicator = !data.buff_indicator;
 			
 			update_cursor();
+			if (!second_init)
+			{
+				second_init = true;
+				setpromptready(&data);
+			}
+			
 		}
 		else if (E0)
 		{
@@ -126,7 +120,10 @@ void main()
 			
 		else if (scancode == NUMLOCK)
 			numlock = !numlock;
-			
+
+		else if (scancode == 0x1C)
+			execute_command(&data);		
+
 		else
 		{
 			char c;
@@ -155,6 +152,16 @@ void main()
 				if (ft_Numlock(shift1 || shift2, numlock, scancode, &data))	
 					continue;
 
+			if (data.col + 1 >= VGA_WIDTH || c == '\n')
+			{
+				if (data.row + 1 == VGA_HEIGHT && c != '\b')
+				{
+					if (data.term_prompt.row <= 0)
+						data.term_prompt.col = 0;
+					else
+						data.term_prompt.row -= 1;
+				}
+			}
 			term_putchar(c);
 			update_cursor();
 		}

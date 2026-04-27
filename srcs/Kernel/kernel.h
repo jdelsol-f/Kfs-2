@@ -7,5 +7,6 @@
 # include "Write_functions/write_functions.h"
 # include "IO/io.h"
 # include "GDT/gdt.h"
+# include "Console/console.h"
 
 #endif
