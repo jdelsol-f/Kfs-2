@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:53:51 by lflandri          #+#    #+#             */
-/*   Updated: 2026/04/27 14:40:51 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:05:28 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,20 @@ static void convertColortextToNoColorText(int startX, int startY, char *buffer)
 
 void	execute_command(t_general_struct *data)
 {
+	int ind = 0;
+	char*	start;
 	char buffer[2125];
 	convertColortextToNoColorText(data->term_prompt.col, data->term_prompt.row, buffer);
+	while (buffer[ind] == ' ')
+		ind++;
+	start = buffer + ind;
 	term_putchar('\n');
-	if (!ft_strncmp("clear", buffer, 5) && (buffer[5] == '\0' || buffer[5] == ' '))
+	if (!ft_strncmp("clear", start, 5) && (start[5] == '\0' || start[5] == ' '))
 		clear(data);
-	else if (!ft_strncmp("getgdt", buffer, 6) && (buffer[6] == '\0' || buffer[6] == ' '))
+	else if (!ft_strncmp("getgdt", start, 6) && (start[6] == '\0' || start[6] == ' '))
 		getgdt(data);
-	else if (!ft_strncmp("echo", buffer, 4) && (buffer[4] == '\0' || buffer[4] == ' '))
-		echo(data, buffer);
+	else if (!ft_strncmp("echo", start, 4) && (start[4] == '\0' || start[4] == ' '))
+		echo(data, start);
 	else
 		ft_printf("Unknow command, please try again.\n");
 	

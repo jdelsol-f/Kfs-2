@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 15:56:26 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/27 12:58:48 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:00:08 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include "../Write_functions/write_functions.h"
 #include "../Console/console.h"
 
-void ft_arrows(int *col,  int *row, int direction)
+void ft_arrows(int *col,  int *row, int direction, t_prompt *prompt)
 {
 	switch (direction)
 	{
 	case UP:
-		if (*row > 0)
+		if (*row == prompt->row + 1 && prompt->col >= *col)
+			*col = prompt->col;
+		if (*row > prompt->row)
 			(*row)--;
 		break;
 		
@@ -29,6 +31,8 @@ void ft_arrows(int *col,  int *row, int direction)
 		break;
 		
 	case LEFT:
+		if (*row == prompt->row && prompt->col == *col)
+			break;
 		if (*col > 0)
 			(*col)--;
 		break;
@@ -43,12 +47,14 @@ void ft_arrows(int *col,  int *row, int direction)
 	}	
 }
 
-void ft_page_cursor(int *col,  int *row, int direction)
+void ft_page_cursor(int *col,  int *row, int direction, t_prompt *prompt)
 {
 	switch (direction)
 	{
 	case PG_UP:
-		(*row) = 0;
+		(*row) = prompt->row;
+		if (prompt->col >= *col)
+			*col = prompt->col;
 		break;
 		
 	case PG_DOWN:
@@ -56,7 +62,10 @@ void ft_page_cursor(int *col,  int *row, int direction)
 		break;
 		
 	case HOME:
-		(*col) = 0;
+		if (*row == prompt->row)
+			(*col) = prompt->col;
+		else
+			(*col) = 0;
 		break;
 		
 	case END:
@@ -75,28 +84,28 @@ bool ft_Numlock(bool shift, bool numlock, uint8_t scancode, t_general_struct *da
 		switch (scancode)
 		{
 		case NUM_7:
-			ft_page_cursor(&data->col, &data->row, HOME);
+			ft_page_cursor(&data->col, &data->row, HOME, &data->term_prompt);
 			break;
 		case NUM_8:
-			ft_arrows(&data->col, &data->row, UP);
+			ft_arrows(&data->col, &data->row, UP, &data->term_prompt);
 			break;
 		case NUM_9:
-			ft_page_cursor(&data->col, &data->row, PG_UP);
+			ft_page_cursor(&data->col, &data->row, PG_UP, &data->term_prompt);
 			break;
 		case NUM_4:
-			ft_arrows(&data->col, &data->row, LEFT);
+			ft_arrows(&data->col, &data->row, LEFT, &data->term_prompt);
 			break;
 		case NUM_6:
-			ft_arrows(&data->col, &data->row, RIGHT);
+			ft_arrows(&data->col, &data->row, RIGHT, &data->term_prompt);
 			break;
 		case NUM_1:
-			ft_page_cursor(&data->col, &data->row, END);
+			ft_page_cursor(&data->col, &data->row, END, &data->term_prompt);
 			break;
 		case NUM_2:
-			ft_arrows(&data->col, &data->row, DOWN);
+			ft_arrows(&data->col, &data->row, DOWN, &data->term_prompt);
 			break;
 		case NUM_3:
-			ft_page_cursor(&data->col, &data->row, PG_DOWN);
+			ft_page_cursor(&data->col, &data->row, PG_DOWN, &data->term_prompt);
 			break;
 		case NUM_DOT:
 			term_putchar('\b');
@@ -116,28 +125,28 @@ void ft_E0_KEY(uint8_t scancode, t_general_struct *data)
 	switch (scancode)
 	{
 	case K_HOME:
-		ft_page_cursor(&data->col, &data->row, HOME);
+		ft_page_cursor(&data->col, &data->row, HOME, &data->term_prompt);
 		break;
 	case K_ARROW_UP:
-		ft_arrows(&data->col, &data->row, UP);
+		ft_arrows(&data->col, &data->row, UP, &data->term_prompt);
 		break;
 	case K_PG_UP:
-		ft_page_cursor(&data->col, &data->row, PG_UP);
+		ft_page_cursor(&data->col, &data->row, PG_UP, &data->term_prompt);
 		break;
 	case K_ARROW_LEFT:
-		ft_arrows(&data->col, &data->row, LEFT);
+		ft_arrows(&data->col, &data->row, LEFT, &data->term_prompt);
 		break;
 	case K_ARROW_RIGHT:
-		ft_arrows(&data->col, &data->row, RIGHT);
+		ft_arrows(&data->col, &data->row, RIGHT, &data->term_prompt);
 		break;
 	case K_END:
-		ft_page_cursor(&data->col, &data->row, END);
+		ft_page_cursor(&data->col, &data->row, END, &data->term_prompt);
 		break;
 	case K_ARROW_DOWN:
-		ft_arrows(&data->col, &data->row, DOWN);
+		ft_arrows(&data->col, &data->row, DOWN, &data->term_prompt);
 		break;
 	case K_PG_DOWN:
-		ft_page_cursor(&data->col, &data->row, PG_DOWN);
+		ft_page_cursor(&data->col, &data->row, PG_DOWN, &data->term_prompt);
 		break;
 	case K_PAD_DELETE:
 		term_putchar('\b');

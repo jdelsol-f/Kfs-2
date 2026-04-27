@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:57:13 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/17 16:36:55 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:00:25 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void    update_cursor();
 uint16_t get_cursor_position(void);
 
 /* KEYBOARD */
-void ft_arrows(int *col,  int *row, int direction);
-void ft_page_cursor(int *col,  int *row, int direction);
+void ft_arrows(int *col,  int *row, int direction, t_prompt *prompt);
+void ft_page_cursor(int *col,  int *row, int direction, t_prompt *prompt);
 bool ft_Numlock(bool shift, bool numlock, uint8_t scancode, t_general_struct *data);
 void ft_E0_KEY(uint8_t scancode, t_general_struct *data);
 
