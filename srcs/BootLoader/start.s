@@ -77,7 +77,6 @@ gdt_ptr:
  
 .section .text
 
-
 lgdt [gdt_ptr]
 
 ljmp $0x08, $.reload_CS

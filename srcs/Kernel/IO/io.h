@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:57:13 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/27 15:00:25 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:39:36 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 /* INPUTS & OUTPUTS */
 uint8_t inb(uint16_t port);
 void    outb(uint16_t port, uint8_t value);
+void    outw(uint16_t port, uint16_t value);
+void    halt();
 uint8_t keyboard_read_input();
 
 /* CURSOR */

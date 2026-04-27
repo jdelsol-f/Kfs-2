@@ -6,7 +6,7 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 12:53:51 by lflandri          #+#    #+#             */
-/*   Updated: 2026/04/27 15:05:28 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:40:25 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void	execute_command(t_general_struct *data)
 		getgdt(data);
 	else if (!ft_strncmp("echo", start, 4) && (start[4] == '\0' || start[4] == ' '))
 		echo(data, start);
+	else if (!ft_strncmp("reboot", start, 6) && (start[6] == '\0' || start[6] == ' '))
+		reboot();
+	else if (!ft_strncmp("exit", start, 4) && (start[4] == '\0' || start[4] == ' '))
+		exit();
+	else if (!ft_strncmp("halt", start, 4) && (start[4] == '\0' || start[4] == ' '))
+		halt();
 	else
 		ft_printf("Unknow command, please try again.\n");
 	

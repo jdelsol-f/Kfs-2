@@ -6,13 +6,14 @@
 /*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:54:43 by lflandri          #+#    #+#             */
-/*   Updated: 2026/04/27 14:43:43 by lflandri         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:40:06 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "console.h"
 #include "../terminal-management/term.h"
 #include "../Write_functions/write_functions.h"
+#include "../IO/io.h"
 
 
 void clear(t_general_struct *data)
@@ -88,4 +89,21 @@ void echo(t_general_struct *data, char *buffer)
         ind++;
     }
     term_putchar('\n');
+}
+
+void reboot()
+{
+    //launch CPU reset
+    uint8_t good = 0x02;
+    while (good & 0x02)
+        good = inb(0x64);
+    outb(0x64, 0xFE);
+    halt();
+    
+}
+
+void exit()
+{
+    outw(0x604, 0x2000);    //shutdow emulation qemu
+    outw(0x4004, 0x3400);   //shutdow emulation virtualbox
 }

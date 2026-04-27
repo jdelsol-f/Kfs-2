@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelsol- <jdelsol-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lflandri <liam.flandrinck.58@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:57:47 by jdelsol-          #+#    #+#             */
-/*   Updated: 2026/04/03 17:43:17 by jdelsol-         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:39:56 by lflandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ void outb(uint16_t port, uint8_t value)
 {
     asm volatile("outb %0, %1" : : "a"(value), "d"(port) : "memory");
 };
+
+void outw(uint16_t port, uint16_t value)
+{
+    asm volatile("outw %0, %1" : : "a"(value), "d"(port) : "memory");
+};
+void halt()
+{
+    asm volatile("hlt");
+}
 
 uint8_t keyboard_read_input()
 {
